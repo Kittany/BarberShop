@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "BarberShop",
+    "slug": "BarberShop",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/images/icon.png",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "splash": {
+        "image": "./src/assets/images/splash.png",
+        "resizeMode": "cover"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "splash": {
+        "mdpi": "./src/assets/images/splash.png",
+        "hdpi": "./src/assets/images/splash.png",
+        "xhdpi": "./src/assets/images/splash.png",
+        "resizeMode": "cover"
+      }
+    },
+    "plugins": [
+      "expo-image-picker"
+    ]
+  }
+}
