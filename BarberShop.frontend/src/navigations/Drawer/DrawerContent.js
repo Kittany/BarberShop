@@ -2,7 +2,7 @@ import React from "react";
 import {View, Text, Image, TouchableOpacity} from "react-native";
 import {DrawerContentScrollView, DrawerItem} from "@react-navigation/drawer";
 import style from "./style";
-import {ABOUT, BOOKING_MENU, GALLERY, LOGIN, SETTINGS, SHOP} from "../../constants/routeNames";
+import {ABOUT, BOOKING_MENU, SHOP} from "../../constants/routeNames";
 import {PRIMARY, SECOND_PRIMARY} from "../../constants/colors";
 import {useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -33,8 +33,6 @@ export default function DrawerContent({navigation}) {
 				<Text style={style.role}>{customer.IsAdmin? "Owner":"Customer"}</Text>
 				<DrawerItem onPress={() => handleNavigation(SHOP)} style={style.drawerItem} focused={selectedScreen === SHOP} label={SHOP} inactiveTintColor={SECOND_PRIMARY} activeTintColor={PRIMARY} activeBackgroundColor={SECOND_PRIMARY} />
 				<DrawerItem onPress={() => handleNavigation(BOOKING_MENU)} style={style.drawerItem} focused={selectedScreen === BOOKING_MENU} label={BOOKING_MENU} inactiveTintColor={SECOND_PRIMARY} activeTintColor={PRIMARY} activeBackgroundColor={SECOND_PRIMARY} />
-				<DrawerItem onPress={() => handleNavigation(GALLERY)} style={style.drawerItem} focused={selectedScreen === GALLERY} label={GALLERY} inactiveTintColor={SECOND_PRIMARY} activeTintColor={PRIMARY} activeBackgroundColor={SECOND_PRIMARY} />
-				<DrawerItem onPress={() => handleNavigation(SETTINGS)} style={style.drawerItem} focused={selectedScreen === SETTINGS} label={SETTINGS} inactiveTintColor={SECOND_PRIMARY} activeTintColor={PRIMARY} activeBackgroundColor={SECOND_PRIMARY} />
 				<DrawerItem onPress={() => handleNavigation(ABOUT)} style={style.drawerItem} focused={selectedScreen === ABOUT} label={ABOUT} inactiveTintColor={SECOND_PRIMARY} activeTintColor={PRIMARY} activeBackgroundColor={SECOND_PRIMARY} />
 				<View style={style.buttonContainer}>
 					<TouchableOpacity style={style.button} onPress={handleSignout}>

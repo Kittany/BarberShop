@@ -3,7 +3,7 @@ import {Text, ActivityIndicator, View, SafeAreaView, TextInput, Image, Touchable
 import {useState, useEffect} from "react";
 import {GlobalData} from "../../../context/provider";
 import style from "./style";
-import {ITEM} from "../../../constants/routeNames";
+import {ITEM, ITEM_UPDATE} from "../../../constants/routeNames";
 import {PRIMARY} from "../../../constants/colors";
 import {OPS, SERVERS_DOWN} from "../../../constants/strings";
 import {OK, BAD_REQUEST} from "../../../constants/server";
@@ -14,6 +14,8 @@ export default function Shop({navigation}) {
 		authState: {customer},
 	} = GlobalData?.();
 
+
+	
 	const [itemsList, setItemsList] = useState([]);
 	const [searchFilter, setSearchFilter] = useState("");
 	const [activity, setActivity] = useState(false);
@@ -59,6 +61,14 @@ export default function Shop({navigation}) {
 		}
 	};
 
+
+	const handleItemUpdate = async(item) =>{
+		if (customer?.IsAdmin)
+			navigation.navigate(ITEM_UPDATE,item);
+	}
+
+
+
 	useEffect(() => {
 		getItemsList();
 	}, []);
@@ -89,9 +99,13 @@ export default function Shop({navigation}) {
 								.map(item => (
 									<View key={item.Title} style={customer.IsAdmin ? style.adminCard : style.card}>
 										<Image style={style.card.img} source={require("../../../assets/images/adaptive-icon.png")} />
+									    <TouchableOpacity onPress={e => handleItemUpdate(item)}>
 										<Text style={style.card.title}>{item.Title}</Text>
 										<Text style={style.card.priceTag}>{item.Price}$</Text>
 										<Text style={style.card.availability}>{item.IsAvailable ? "Available" : "Not Available"}</Text>
+										</TouchableOpacity>
+									
+									
 										{customer.IsAdmin && (
 											<View style={style.deleteItemButtonContainer}>
 												<TouchableOpacity style={style.deleteItemButton} onPress={e => deleteItem(item?.Title)}>

@@ -1,6 +1,7 @@
 //Shop Navigator Screen
 export const SHOP = "Shop";
 export const ITEM = "Item";
+export const ITEM_UPDATE = "ItemUpdate";
 export const CART = "Cart";
 
 //Bookings Navigator Screen
@@ -12,12 +13,6 @@ export const MY_APPOINTMENTS = "My Appointment";
 export const LOGIN = "Login";
 export const REGISTER = "Register";
 export const FORGOTPASSWORD = "Forgot Password"
-
-//Gallery screen
-export const GALLERY = "Gallery";
-
-//Settings screen
-export const SETTINGS = "Settings";
 
 //About screen
 export const ABOUT = "About";
