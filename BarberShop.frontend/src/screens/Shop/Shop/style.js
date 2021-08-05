@@ -50,7 +50,7 @@ export default {
 		},
 		title: {
 			fontWeight: "bold",
-			fontSize: 23,
+			fontSize: 15,
 			color: SECOND_PRIMARY,
 			textAlign: "center",
 		},
@@ -75,7 +75,7 @@ export default {
 		height: 230,
 		borderRadius: 10,
 		padding: 10,
-		marginBottom: "5%"
+		marginBottom: "5%",
 	},
 
 	inputContainer: {
@@ -99,25 +99,24 @@ export default {
 		fontFamily: "Cuprum_400Regular",
 	},
 	addItemButtonContainer: {
-		flexDirection:"row",
-		width:"70%",
-		justifyContent:"center",
-		borderTopWidth:2,
-		borderBottomWidth:2,
-		borderLeftWidth:2,
-		borderRightWidth:2,
-		padding:5,
-		borderRadius:7,
-		borderColor:PRIMARY,
-		marginBottom:"5%"
+		flexDirection: "row",
+		width: "70%",
+		justifyContent: "center",
+		borderTopWidth: 2,
+		borderBottomWidth: 2,
+		borderLeftWidth: 2,
+		borderRightWidth: 2,
+		padding: 5,
+		borderRadius: 7,
+		borderColor: PRIMARY,
+		marginBottom: "5%",
 	},
 	addItemButton: {
-		width:"100%",
-		Text: 
-		{
-			width:"100%",
-			color:PRIMARY,
-			textAlign:"center"
+		width: "100%",
+		Text: {
+			width: "100%",
+			color: PRIMARY,
+			textAlign: "center",
 		},
 	},
 
@@ -143,7 +142,7 @@ export default {
 		text: {
 			color: PRIMARY,
 			fontWeight: "bold",
-			backgroundColor:SECOND_PRIMARY
+			backgroundColor: SECOND_PRIMARY,
 		},
 	},
 	paragraph: {
@@ -157,6 +156,6 @@ export default {
 		width: "80%",
 		paddingLeft: 5,
 		textAlign: "center",
-		marginTop:"3%"
+		marginTop: "3%",
 	},
 };
