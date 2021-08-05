@@ -50,7 +50,7 @@ namespace BarberShop.Web.API.Controllers
             var res = DataAccess.ValidateCustomer(customer.PhoneNumber, customer.Password);
 
             if (res != null)
-                return Ok(res);  
+                return Ok(res);
 
             return BadRequest("Error validating customer");
         }
@@ -84,14 +84,14 @@ namespace BarberShop.Web.API.Controllers
         [Route("api/customer/add")]
         public IHttpActionResult AddCustomer([FromBody] Customer customer)
         {
-            if (DataAccess.AddCustomer(customer.PhoneNumber,customer.FirstName,customer.LastName,customer.Password))
+            if (DataAccess.AddCustomer(customer.PhoneNumber, customer.FirstName, customer.LastName, customer.Password))
                 return Ok("Customer was successfully added");
 
             return BadRequest("Error adding customer");
         }
 
-        // PUT api/customer/changepassword
-        [HttpPut]
+        // POST api/customer/changepassword
+        [HttpPost]
         [Route("api/customer/changepassword")]
         public IHttpActionResult ChangePassword([FromBody] Customer customer)
         {
@@ -101,8 +101,8 @@ namespace BarberShop.Web.API.Controllers
             return BadRequest("Error changing password");
         }
 
-        // PUT api/customer/punish
-        [HttpPut]
+        // POST api/customer/punish
+        [HttpPost]
         [Route("api/customer/punish")]
         public IHttpActionResult IncreamentCustomerNeglectionPoints([FromBody] Customer customer)
         {
@@ -112,8 +112,8 @@ namespace BarberShop.Web.API.Controllers
             return BadRequest("The customer was not given a neglection point due to an error");
         }
 
-        // PUT api/customer/forgive
-        [HttpPut]
+        // POST api/customer/forgive
+        [HttpPost]
         [Route("api/customer/forgive")]
         public IHttpActionResult ResetCustomerNeglectionPoints([FromBody] Customer customer)
         {

@@ -10,22 +10,22 @@ using Dapper;
 
 namespace BarberShop.Web.API.Data
 {
-    public abstract class DataAccess 
+    public abstract class DataAccess
     {
 
 
-        #if DEBUG
+#if DEBUG
         static string connectionString = "Local";
-        #else
+#else
         static string connectionString = "Server";
-        #endif
+#endif
         public static bool AddCustomer(string phoneNumber, string firstName, string lastName, string password)
         {
             try
             {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
                 {
-                     return connection.Query<int>("dbo.AddCustomer @PhoneNumber, @FirstName, @LastName, @Password", new { PhoneNumber = phoneNumber, FirstName = firstName, LastName = lastName, Password = password }).FirstOrDefault() > 0;             
+                    return connection.Query<int>("dbo.AddCustomer @PhoneNumber, @FirstName, @LastName, @Password", new { PhoneNumber = phoneNumber, FirstName = firstName, LastName = lastName, Password = password }).FirstOrDefault() > 0;
                 }
 
             }
@@ -95,7 +95,7 @@ namespace BarberShop.Web.API.Data
             {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
                 {
-                    return connection.Query<string>("dbo.CheckIfPhoneNumberExists @PhoneNumber", new { PhoneNumber = phoneNumber}).FirstOrDefault() != null;
+                    return connection.Query<string>("dbo.CheckIfPhoneNumberExists @PhoneNumber", new { PhoneNumber = phoneNumber }).FirstOrDefault() != null;
                 }
 
             }
@@ -111,7 +111,7 @@ namespace BarberShop.Web.API.Data
             {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
                 {
-                    return connection.Query<Customer>("dbo.GetCustomer @PhoneNumber", new { PhoneNumber = phoneNumber}).FirstOrDefault();
+                    return connection.Query<Customer>("dbo.GetCustomer @PhoneNumber", new { PhoneNumber = phoneNumber }).FirstOrDefault();
                 }
 
             }
@@ -144,7 +144,7 @@ namespace BarberShop.Web.API.Data
             {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
                 {
-                    return connection.Query<int>("dbo.AddProduct @Title, @Descreption, @Price, @IsAvailable, @Image", new {Title = title, Descreption = descreption, Price = price, IsAvailable = isAvailable, Image = image }).FirstOrDefault() > 0;
+                    return connection.Query<int>("dbo.AddProduct @Title, @Descreption, @Price, @IsAvailable, @Image", new { Title = title, Descreption = descreption, Price = price, IsAvailable = isAvailable, Image = image }).FirstOrDefault() > 0;
                 }
 
             }
@@ -276,7 +276,7 @@ namespace BarberShop.Web.API.Data
             {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
                 {
-                    return connection.Query<int>("dbo.IncreamentCustomerNeglectionPoints @PhoneNumber", new { PhoneNumber = phoneNumber}).FirstOrDefault() > 0;
+                    return connection.Query<int>("dbo.IncreamentCustomerNeglectionPoints @PhoneNumber", new { PhoneNumber = phoneNumber }).FirstOrDefault() > 0;
                 }
 
             }
@@ -303,5 +303,41 @@ namespace BarberShop.Web.API.Data
             }
 
         }
+
+
+        public static Shop GetShopDetails()
+        {
+            try
+            {
+                using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
+                {
+                    return connection.Query<Shop>("dbo.GetProductDetails").FirstOrDefault();
+                }
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static bool UpdateShopDetails(Shop shop)
+        {
+            try
+            {
+                using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
+                {
+                    return connection.Query<int>("dbo.UpdateShopDetails @FullName, @ShopName, @PhoneNumber, @WorkingHours, @LocationLatitude, @LocationLongitude", new { shop.FullName, shop.ShopName, shop.PhoneNumber, shop.WorkingHours, shop.LocationLatitude, shop.LocationLongitude }).FirstOrDefault() > 0;
+                }
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+
     }
 }

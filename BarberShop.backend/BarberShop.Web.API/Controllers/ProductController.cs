@@ -36,8 +36,8 @@ namespace BarberShop.Web.API.Controllers
             return BadRequest("Error adding product");
         }
 
-        // PUT api/product/update
-        [HttpPut]
+        // POST api/product/update
+        [HttpPost]
         [Route("api/product/update")]
         public IHttpActionResult UpdateProduct([FromBody] Product product)
         {
@@ -47,8 +47,8 @@ namespace BarberShop.Web.API.Controllers
             return BadRequest("Error updating product");
         }
 
-        // DELETE api/product/delete
-        [HttpDelete]
+        // POST api/product/delete
+        [HttpPost]
         [Route("api/product/delete")]
         public IHttpActionResult DeleteProduct([FromBody] Product product)
         {

@@ -36,8 +36,8 @@ namespace BarberShop.Web.API.Controllers
         }
 
 
-        // DELETE api/appointment/cancel
-        [HttpDelete]
+        // POST api/appointment/cancel
+        [HttpPost]
         [Route("api/appointment/cancel")]
         public IHttpActionResult CancelAnAppointment([FromBody] Appointment appointment)
         {
@@ -47,7 +47,7 @@ namespace BarberShop.Web.API.Controllers
             return BadRequest("Error canceling the appointment");
         }
 
-   
+
 
     }
 }

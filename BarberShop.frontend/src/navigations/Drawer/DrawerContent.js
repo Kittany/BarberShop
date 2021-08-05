@@ -1,18 +1,18 @@
 import React from "react";
-import {View, Text, Image, TouchableOpacity} from "react-native";
-import {DrawerContentScrollView, DrawerItem} from "@react-navigation/drawer";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import style from "./style";
-import {ABOUT, BOOKING_MENU, SHOP} from "../../constants/routeNames";
-import {PRIMARY, SECOND_PRIMARY} from "../../constants/colors";
-import {useState} from "react";
+import { ABOUT, BOOKING_MENU, SHOP } from "../../constants/routeNames";
+import { PRIMARY, SECOND_PRIMARY } from "../../constants/colors";
+import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {GlobalData} from "../../context/provider";
+import { GlobalData } from "../../context/provider";
 import authInitialState from "../../context/initialStates/authInitialState";
 
-export default function DrawerContent({navigation}) {
-	const [selectedScreen, setSelectedScreen] = useState(BOOKING_MENU); //When the app starts this will be selected
+export default function DrawerContent({ navigation }) {
+	const [selectedScreen, setSelectedScreen] = useState(SHOP); //When the app starts this will be selected
 	const {
-		authState: {customer},
+		authState: { customer },
 		setAuthState,
 	} = GlobalData?.();
 

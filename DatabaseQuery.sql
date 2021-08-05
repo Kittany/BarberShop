@@ -120,6 +120,14 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE dbo.GetShopDetail
+AS
+BEGIN
+	SET NOCOUNT ON;
+			SELECT * FROM ShopDetail
+END
+GO
+
 
 
 /****** POST ******/
@@ -252,6 +260,27 @@ END
 GO
 
 
+CREATE PROCEDURE dbo.UpdateShopDetails @FullName nvarchar(50), @ShopName nvarchar(50), @PhoneNumber nvarchar(10), @WorkingHours nvarchar(MAX), @LocationLatitude nvarchar(100), @LocationLongitude nvarchar(100) 
+AS
+BEGIN
+	SET NOCOUNT ON;
+	BEGIN TRY  
+	 
+	        UPDATE dbo.ShopDetail
+			SET FullName = @FullName,
+			PhoneNumber = @PhoneNumber,
+			WorkingHours = @WorkingHours,
+			LocationLatitude = @LocationLatitude,
+			LocationLongitude = @LocationLongitude
+			WHERE ShopName = @ShopName;
+			SELECT 1;
+	END TRY  
+
+	BEGIN CATCH  
+			SELECT 0
+	END CATCH;   
+END
+GO
 
 /****** DELETE ******/
 
