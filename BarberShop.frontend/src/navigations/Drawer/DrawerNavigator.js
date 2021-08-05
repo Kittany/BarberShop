@@ -10,8 +10,9 @@ export default function DrawerNavigator() {
 	const Drawer = createDrawerNavigator();
 	return (
 		<Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-			<Drawer.Screen name={SHOP} component={ShopNavigator} />
+			{/*The first component is the default one when the user opens the app */}
 			<Drawer.Screen name={BOOKING_MENU} component={BookingNavigator} />
+			<Drawer.Screen name={SHOP} component={ShopNavigator} />
 			<Drawer.Screen name={ABOUT} component={About} />
 		</Drawer.Navigator>
 	);

@@ -1,4 +1,5 @@
-import {PRIMARY, SECOND_PRIMARY} from "../../constants/colors";
+import {PRIMARY, SECOND_PRIMARY} from "../../../constants/colors";
+import style from "./style";
 
 export default {
 	menu: {

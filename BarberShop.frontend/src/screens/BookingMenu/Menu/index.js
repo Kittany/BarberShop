@@ -1,11 +1,17 @@
 import React from "react";
-import {Text, View} from "react-native";
-import style from "../style";
+import {SafeAreaView, StatusBar, Text, View} from "react-native";
+import { PRIMARY } from "../../../constants/colors";
+import style from "./style";
 
 export default function Menu() {
 	return (
-		<View style={style.menu.container}>
-			<Text>Hello From BookingMenu</Text>
-		</View>
+		<>
+			<StatusBar barStyle="dark-content" animated={true} backgroundColor={PRIMARY} />
+			<SafeAreaView style={style.wrapper}>
+				<View style={style.container}>
+					<Text>Hello</Text>
+				</View>
+			</SafeAreaView>
+		</>
 	);
 }

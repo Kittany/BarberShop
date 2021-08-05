@@ -8,11 +8,12 @@ export const CART = "Cart";
 export const BOOKING_MENU = "Booking Menu";
 export const BOOK_APPOINTMENT = "Book Appointment";
 export const MY_APPOINTMENTS = "My Appointment";
+export const CUSTOMERS_APPOINTMENTS = "Customers Appointments";
 
 //Auth Navigator Screen
 export const LOGIN = "Login";
 export const REGISTER = "Register";
-export const FORGOTPASSWORD = "Forgot Password"
+export const FORGOTPASSWORD = "Forgot Password";
 
 //About screen
 export const ABOUT = "About";

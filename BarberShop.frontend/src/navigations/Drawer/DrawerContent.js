@@ -10,8 +10,11 @@ import {GlobalData} from "../../context/provider";
 import authInitialState from "../../context/initialStates/authInitialState";
 
 export default function DrawerContent({navigation}) {
-	const [selectedScreen, setSelectedScreen] = useState(SHOP);
-	const {authState:{customer},setAuthState} = GlobalData?.();
+	const [selectedScreen, setSelectedScreen] = useState(BOOKING_MENU); //When the app starts this will be selected
+	const {
+		authState: {customer},
+		setAuthState,
+	} = GlobalData?.();
 
 	//Update the style of the selected screen
 	const handleNavigation = screenName => {
@@ -29,8 +32,10 @@ export default function DrawerContent({navigation}) {
 		<>
 			<View style={style.drawerContent}>
 				<Image style={style.logo} source={require("../../assets/images/icon.png")} />
-				<Text style={style.drawerTitle}>{customer.FirstName} {customer.LastName}</Text>
-				<Text style={style.role}>{customer.IsAdmin? "Owner":"Customer"}</Text>
+				<Text style={style.drawerTitle}>
+					{customer.FirstName} {customer.LastName}
+				</Text>
+				<Text style={style.role}>{customer.IsAdmin ? "Owner" : "Customer"}</Text>
 				<DrawerItem onPress={() => handleNavigation(SHOP)} style={style.drawerItem} focused={selectedScreen === SHOP} label={SHOP} inactiveTintColor={SECOND_PRIMARY} activeTintColor={PRIMARY} activeBackgroundColor={SECOND_PRIMARY} />
 				<DrawerItem onPress={() => handleNavigation(BOOKING_MENU)} style={style.drawerItem} focused={selectedScreen === BOOKING_MENU} label={BOOKING_MENU} inactiveTintColor={SECOND_PRIMARY} activeTintColor={PRIMARY} activeBackgroundColor={SECOND_PRIMARY} />
 				<DrawerItem onPress={() => handleNavigation(ABOUT)} style={style.drawerItem} focused={selectedScreen === ABOUT} label={ABOUT} inactiveTintColor={SECOND_PRIMARY} activeTintColor={PRIMARY} activeBackgroundColor={SECOND_PRIMARY} />
