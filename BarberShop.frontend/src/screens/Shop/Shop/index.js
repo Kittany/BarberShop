@@ -34,7 +34,7 @@ export default function Shop({navigation}) {
 				setErrorMessage(OPS);
 			} else {
 				setActivity(false);
-				setErrorMessage("SERVERS_DOWN");
+				setErrorMessage(SERVERS_DOWN);
 			}
 		} catch {
 			setActivity(false);

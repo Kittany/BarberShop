@@ -7,8 +7,8 @@ export const CART = "Cart";
 //Bookings Navigator Screen
 export const BOOKING_MENU = "Booking Menu";
 export const BOOK_APPOINTMENT = "Book Appointment";
-export const MY_APPOINTMENTS = "My Appointment";
-export const CUSTOMERS_APPOINTMENTS = "Customers Appointments";
+export const MY_APPOINTMENTS = "My Appointments";
+export const TODAYS_APPOINTMENTS = "Today's Appointments";
 
 //Auth Navigator Screen
 export const LOGIN = "Login";

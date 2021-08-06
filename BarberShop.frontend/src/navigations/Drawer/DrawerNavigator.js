@@ -11,8 +11,8 @@ export default function DrawerNavigator() {
 	return (
 		<Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
 			{/*The first component is the default one when the user opens the app */}
-			<Drawer.Screen name={SHOP} component={ShopNavigator} />
 			<Drawer.Screen name={BOOKING_MENU} component={BookingNavigator} />
+			<Drawer.Screen name={SHOP} component={ShopNavigator} />
 			<Drawer.Screen name={ABOUT} component={About} />
 		</Drawer.Navigator>
 	);
