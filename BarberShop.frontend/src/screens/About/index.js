@@ -112,28 +112,23 @@ export default function About() {
 					</MapView>
 					<Text style={style.owner}>OWNER</Text>
 					<View style={style.inputContainer}>
-						<TextInput style={style.input} value={ownerName} onChangeText={text => setOwnerName(text)} keyboardType="text" editable={customer?.IsAdmin} />
+						<TextInput style={style.input} value={ownerName} onChangeText={text => setOwnerName(text)} keyboardType="default" editable={customer?.IsAdmin} />
 					</View>
-					{/* <Text style={style.owner.name}>{shopDetails?.FullName}</Text> */}
 					<Text style={style.owner}>PHONE NUMBER</Text>
 					<View style={style.inputContainer}>
 						<TextInput style={style.input} value={ownerPhoneNumber} onChangeText={text => setOwnerPhoneNumber(text)} keyboardType="numeric" editable={customer?.IsAdmin} />
 					</View>
-					{/* <Text style={style.owner.phone}>{shopDetails?.PhoneNumber}</Text> */}
-
 					<Text style={style.workingHours}>Working Hours</Text>
 					<View style={style.workingHoursContainer}>
-						<Text style={style.workingHoursContainer.title}>Wednesday - Monday</Text>
+						<Text style={style.workingHoursContainer.title}>Sunday - Saturday</Text>
 						<Text style={style.workingHoursContainer.value}>8:00 AM - 20:00 PM</Text>
-						<Text style={style.workingHoursContainer.title}>Tuesday</Text>
-						<Text style={style.workingHoursContainer.closed}>CLOSED</Text>
 					</View>
 					{activity && <ActivityIndicator size="large" color={PRIMARY} />}
-					<View style={style.updateOwnerSettingsButtonContainer}>
+					{customer?.IsAdmin && <View style={style.updateOwnerSettingsButtonContainer}>
 						<TouchableOpacity style={style.updateOwnerSettingsButton} onPress={e => handleOwnerSettings()}>
 							<Text style={style.updateOwnerSettingsButton.text}>Save Changes</Text>
 						</TouchableOpacity>
-					</View>
+					</View>}
 					{errorMessage?.length > 0 ? <Text style={style.errorMessage}>{errorMessage}</Text> : <></>}
 				</View>
 			</SafeAreaView>

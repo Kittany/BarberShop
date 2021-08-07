@@ -27,17 +27,14 @@ GO
 /****** Object:  Table [dbo].[Product]    Script Date: 7/14/2021 2:00:45 PM ******/
 
 CREATE TABLE [dbo].[Product](
-	[Title] [nvarchar](50) NOT NULL,
+	[Title] [nvarchar](50) NOT NULL PRIMARY KEY,
 	[Descreption] [nvarchar](300) NULL,
 	[Price] [int] NOT NULL,
 	[IsAvailable] [bit] NOT NULL,
-	[Image] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
-(
-	[Title] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
+	--[Image] [varbinary] (MAX) NOT NULL,
+	[Image] [nvarchar](MAX) NOT NULL
+	)
+
 
 
 /****** Object:  Table [dbo].[Appointments]    Script Date: 7/14/2021 2:13:00 PM ******/
@@ -45,6 +42,7 @@ GO
 CREATE TABLE [dbo].[Appointments] (
     [Appointment] [datetime] NOT NULL PRIMARY KEY,
     [PhoneNumber] [nvarchar](10) NOT NULL FOREIGN KEY REFERENCES Customer(PhoneNumber),
+	[FullName] [nvarchar](100) NOT NULL, 
 	[Successfull] bit NOT NULL
 );
 
@@ -116,6 +114,7 @@ CREATE PROCEDURE dbo.GetAllProducts
 AS
 BEGIN
 	SET NOCOUNT ON;
+	       --SELECT Title,Descreption,Price,IsAvailable,cast(Image as nvarchar(max)) as Image  FROM [dbo].Product 
 			SELECT *  FROM [dbo].Product
 END
 GO
@@ -165,7 +164,7 @@ GO
 
 
 
-CREATE PROCEDURE dbo.AddProduct @Title nvarchar(50), @Descreption nvarchar(300), @Price int, @IsAvailable bit, @Image nvarchar(max)
+CREATE PROCEDURE dbo.AddProduct @Title nvarchar(50), @Descreption nvarchar(300), @Price int, @IsAvailable bit, @Image varbinary(MAX)
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -180,12 +179,12 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE dbo.BookAnAppointment @Appointment datetime, @PhoneNumber nvarchar(10)
+CREATE PROCEDURE dbo.BookAnAppointment @Appointment datetime, @PhoneNumber nvarchar(10), @FullName nvarchar(100)
 AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY  
-			INSERT INTO [dbo].Appointments(Appointment,PhoneNumber,Successfull) VALUES (@Appointment,@PhoneNumber,1) --By Default is true, if a customer neglects an appointments the owner has an option to set it to false (which rarely happens)
+			INSERT INTO [dbo].Appointments(Appointment,PhoneNumber,FullName,Successfull) VALUES (@Appointment,@PhoneNumber,@FullName,1) --By Default is true, if a customer neglects an appointments the owner has an option to set it to false (which rarely happens)
 			SELECT 1;
 	END TRY  
 

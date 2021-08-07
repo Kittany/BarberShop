@@ -18,10 +18,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/17/2021 21:57:23</publishTime>
     </File>
     <File Include="bin/BarberShop.Web.API.dll">
-      <publishTime>08/06/2021 20:19:35</publishTime>
+      <publishTime>08/07/2021 23:52:23</publishTime>
     </File>
     <File Include="bin/BarberShop.Web.API.pdb">
-      <publishTime>08/06/2021 20:19:35</publishTime>
+      <publishTime>08/07/2021 23:52:23</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
       <publishTime>08/05/2021 22:58:11</publishTime>

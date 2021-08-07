@@ -123,13 +123,7 @@ export default {
         value: {
             color: "green",
             paddingLeft: 5,
-            marginBottom:"2%"
-        },
-        closed: {
-            color: "red",
-            paddingLeft: 5,
-            marginBottom:"5%"
-
+            marginBottom: "2%"
         }
 
     },

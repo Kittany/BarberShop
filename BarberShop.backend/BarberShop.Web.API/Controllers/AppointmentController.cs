@@ -44,7 +44,7 @@ namespace BarberShop.Web.API.Controllers
         [Route("api/appointment/book")]
         public IHttpActionResult BookAnAppointment([FromBody] Appointment appointment)
         {
-            if (DataAccess.BookAnAppointment(appointment.Year, appointment.Month, appointment.Day, appointment.Hour, appointment.Minutes, appointment.PhoneNumber))
+            if (DataAccess.BookAnAppointment(appointment.Year, appointment.Month, appointment.Day, appointment.Hour, appointment.Minutes, appointment.PhoneNumber,appointment.FullName))
                 return Ok("Appointment was successfully booked");
 
             return BadRequest("Error booking an appointment");

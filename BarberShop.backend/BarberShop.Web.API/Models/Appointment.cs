@@ -14,6 +14,7 @@ namespace BarberShop.Web.API.Models
         public int Hour { get; set; }
         public int Minutes { get; set; }
         public string PhoneNumber { get; set; }
+        public string FullName { get; set; }
 
         public bool Successful { get; set; }
     }

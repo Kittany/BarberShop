@@ -157,6 +157,9 @@ namespace BarberShop.Web.API.Data
 
         public static bool AddProduct(string title, string descreption, int price, bool isAvailable, string image)
         {
+
+            //Image = Convert.FromBase64String(image) converts the data to byteArray
+
             try
             {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
@@ -191,7 +194,7 @@ namespace BarberShop.Web.API.Data
 
 
 
-        public static bool BookAnAppointment(int year, int month, int day, int hour, int minute, string phoneNumber)
+        public static bool BookAnAppointment(int year, int month, int day, int hour, int minute, string phoneNumber, string fullName)
         {
             //The new format insures we are not dealing with seconds
             DateTime appointmentDateFormat = new DateTime(year, month, day, hour, minute, 0);
@@ -200,7 +203,7 @@ namespace BarberShop.Web.API.Data
             {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
                 {
-                    return connection.Query<int>("dbo.BookAnAppointment @Appointment, @PhoneNumber", new { Appointment = appointmentDateFormat, PhoneNumber = phoneNumber }).FirstOrDefault() > 0;
+                    return connection.Query<int>("dbo.BookAnAppointment @Appointment, @PhoneNumber, @FullName", new { Appointment = appointmentDateFormat, PhoneNumber = phoneNumber, FullName = fullName }).FirstOrDefault() > 0;
                 }
 
             }

@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from "react";
-import {SafeAreaView, Image, StatusBar, Text, View, TextInput, TouchableOpacity, ActivityIndicator, DevSettings} from "react-native";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, Image, StatusBar, Text, View, TextInput, TouchableOpacity, ActivityIndicator, DevSettings } from "react-native";
 import style from "./style";
-import {PRIMARY} from "../../../constants/colors";
+import { PRIMARY } from "../../../constants/colors";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
-import {Platform} from "@unimodules/react-native-adapter";
-import {EMPTY_FIELDS, OPS, SERVERS_DOWN} from "../../../constants/strings";
+import { Platform } from "@unimodules/react-native-adapter";
+import { EMPTY_FIELDS, OPS, SERVERS_DOWN } from "../../../constants/strings";
 import FetchAPI from "../../../utils/FetchAPI";
-import {BAD_REQUEST, OK} from "../../../constants/server";
-import {SHOP} from "../../../constants/routeNames";
+import { BAD_REQUEST, OK } from "../../../constants/server";
+import { SHOP } from "../../../constants/routeNames";
 
-export default function Item({navigation}) {
+export default function Item({ navigation }) {
 	const [productName, setProductName] = useState("");
 	const [productPrice, setProductPrice] = useState("");
 	const [image, setImage] = useState(null);
@@ -23,7 +23,7 @@ export default function Item({navigation}) {
 
 	const CheckPermission = async () => {
 		if (Platform.OS !== "web") {
-			const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
+			const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
 			if (status !== "granted") {
 				alert("permission Denied!");
@@ -43,10 +43,12 @@ export default function Item({navigation}) {
 				base64: true,
 			});
 
+
+
 			if (!result.cancelled) {
 				setImage(result);
 			}
-		} catch {}
+		} catch { }
 	};
 
 	const addItem = async () => {
@@ -73,7 +75,7 @@ export default function Item({navigation}) {
 
 		//Add Data
 		try {
-			let response = await FetchAPI("POST", "product", "add", {Title: productName, Price: productPrice, IsAvailable: true, Descreption: "", Image: "No Image"});
+			let response = await FetchAPI("POST", "product", "add", { Title: productName, Price: productPrice, IsAvailable: true, Descreption: "", Image: "No Image" });
 			if (response.status === OK) {
 				await setActivity(false);
 				//Because we don't have real-time functionallity we reset the app to refresh teh data
@@ -108,7 +110,7 @@ export default function Item({navigation}) {
 							<Text style={style.paragraph}>Choose Image</Text>
 						</TouchableOpacity>
 					</View>
-					{image && <Image source={{uri: image.uri}} style={{width: 200, height: 150, marginTop: "5%"}} />}
+					{image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 150, marginTop: "5%" }} />}
 					{activity && <ActivityIndicator size="large" color={PRIMARY} />}
 					{errorMessage ? <Text style={style.errorMessage}>{errorMessage}</Text> : <></>}
 					<View style={style.buttonsContainer}>
