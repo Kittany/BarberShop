@@ -19,6 +19,7 @@ export default function BookAppointment({navigation}) {
 
 	const [activity, setActivity] = useState(false);
 	const [selectedCard, setSelectedCard] = useState({});
+
 	const [bookingDates, setBookingDates] = useState([]);
 
 	useEffect(() => {
@@ -29,8 +30,11 @@ export default function BookAppointment({navigation}) {
 	const setupDates = async () => {
 		setActivity(true);
 
+		//Array that contains the data after parsing the response from json
 		let appointmentsInDatabase = [];
-		let bookedAppointments = []
+
+		//Array that contains all the booked dates from the database
+		let bookedAppointments = [];
 
 		try {
 			let response = await FetchAPI("GET", "appointment", "getall");
@@ -65,15 +69,17 @@ export default function BookAppointment({navigation}) {
 		while (today.getDate() != threeDaysFromNow.getDate()) {
 			//Add the working hours to an array
 			if (today.getHours() < 21 && today.getHours() > 7) {
+				//Reformat the date so it matches the data retreived from the database
 				let date = today.toLocaleDateString().split("/");
 				let month = date[0];
 				let day = date[1];
 				let year = "20" + date[2];
 
 				let currentDateFormat = year + "-" + month + "-" + day;
-				today.toLocaleDateString();
 
-				await bookingDatesTempList.push({day: today.getDate(), date: today.toLocaleDateString(), time: today.toLocaleTimeString()});
+				//Basically we check if the date is booked in the bookedAppointments array using the some method, if the some method returns false that means the date does not exist therfore it's not booked so we add it to the available booking dates
+				if (!bookedAppointments.some(appointment => appointment[0] === currentDateFormat && appointment[1] === today.toLocaleTimeString())) 
+				await bookingDatesTempList.push({day: dayNames[(today.getDate() - 1) % 7], date: today.toLocaleDateString(), time: today.toLocaleTimeString()});
 			}
 			//Increament time by 30 minutes
 			await today.setMinutes(today.getMinutes() + appointmentMinutesGap);
@@ -131,20 +137,20 @@ export default function BookAppointment({navigation}) {
 					{activity && <ActivityIndicator size="large" color={PRIMARY} style={{marginTop: "1%"}} />}
 					<ScrollView style={style.scrollView}>
 						<View style={style.itemsContainer}>
-							{bookingDates.map(availableAppointment => (
+							{bookingDates.map((availableAppointment) => (
 								<>
 									{selectedCard?.day === availableAppointment.day && selectedCard?.date === availableAppointment.date && selectedCard.time === availableAppointment.time ? (
-										<View key={availableAppointment.date + availableAppointment.time + availableAppointment.day} style={style.selectedCard}>
+										<View style={style.selectedCard}>
 											<TouchableOpacity style={style.card.button} onPress={e => setSelectedCard({day: availableAppointment.day, date: availableAppointment.date, time: availableAppointment.time})}>
-												<Text style={style.selectedCard.button.text}> {dayNames[(availableAppointment?.day - 1) % 7]}</Text>
+												<Text style={style.selectedCard.button.text}> {availableAppointment?.day}</Text>
 												<Text style={style.selectedCard.button.text}> {availableAppointment?.date}</Text>
 												<Text style={style.selectedCard.button.text}>{availableAppointment?.time}</Text>
 											</TouchableOpacity>
 										</View>
 									) : (
-										<View key={availableAppointment.date + availableAppointment.time + availableAppointment.day} style={style.card}>
+										<View style={style.card}>
 											<TouchableOpacity style={style.card.button} onPress={e => setSelectedCard({day: availableAppointment.day, date: availableAppointment.date, time: availableAppointment.time})}>
-												<Text style={style.card.button.text}> {dayNames[(availableAppointment?.day - 1) % 7]}</Text>
+												<Text style={style.card.button.text}> {availableAppointment?.day}</Text>
 												<Text style={style.card.button.text}> {availableAppointment?.date}</Text>
 												<Text style={style.card.button.text}>{availableAppointment?.time}</Text>
 											</TouchableOpacity>

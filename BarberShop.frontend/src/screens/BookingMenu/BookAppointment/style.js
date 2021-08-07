@@ -37,6 +37,7 @@ export default {
 		justifyContent: "center",
 		alignItems: "center",
 		backgroundColor: PRIMARY,
+		paddingTop:"1%",
 		touchableOpacity: {
 			width: "100%",
 			height: "50%",
@@ -45,7 +46,7 @@ export default {
 			height:"100%",
 			textAlign: "center",
 			fontWeight: "bold",
-			fontSize: 17,
+			fontSize: 20,
 			}
 		},
 	},
