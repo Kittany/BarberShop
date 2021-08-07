@@ -11,17 +11,32 @@ namespace BarberShop.Web.API.Controllers
 {
     public class AppointmentController : ApiController
     {
-        // GET api/appointment/today
+        // GET api/appointment/getall
         [HttpGet]
-        [Route("api/appointment/today")]
-        public IHttpActionResult GetTodaysAppointments([FromBody] Appointment appointment)
+        [Route("api/appointment/getall")]
+        public IHttpActionResult GetAllAppointments()
         {
-            var res = DataAccess.GetTodaysAppointments(appointment.AppointmentDate);
+            var res = DataAccess.GetAllAppointments();
 
             if (res != null)
                 return Ok(res);
 
-            return BadRequest("Error getting today's appointments");
+            return BadRequest("Error getting the appointments");
+        }
+
+
+
+        // Get api/appointment/getcustomerappointments
+        [HttpGet]
+        [Route("api/appointment/getcustomerappointments")]
+        public IHttpActionResult GetCustomerAppointments([FromBody] Customer customer)
+        {
+            var res = DataAccess.GetCustomerAppointments(customer.PhoneNumber);
+
+            if (res != null)
+                return Ok(res);
+
+            return BadRequest("Error getting customer appointments");
         }
 
         // POST api/appointment/book
@@ -29,7 +44,7 @@ namespace BarberShop.Web.API.Controllers
         [Route("api/appointment/book")]
         public IHttpActionResult BookAnAppointment([FromBody] Appointment appointment)
         {
-            if (DataAccess.BookAnAppointment(appointment.AppointmentDate, appointment.PhoneNumber))
+            if (DataAccess.BookAnAppointment(appointment.Year, appointment.Month, appointment.Day, appointment.Hour, appointment.Minutes, appointment.PhoneNumber))
                 return Ok("Appointment was successfully booked");
 
             return BadRequest("Error booking an appointment");
@@ -41,7 +56,7 @@ namespace BarberShop.Web.API.Controllers
         [Route("api/appointment/cancel")]
         public IHttpActionResult CancelAnAppointment([FromBody] Appointment appointment)
         {
-            if (DataAccess.CancelAnAppointment(appointment.AppointmentDate))
+            if (DataAccess.CancelAnAppointment(appointment.Year, appointment.Month, appointment.Day, appointment.Hour, appointment.Minutes))
                 return Ok("Appointment has been successfully canceled");
 
             return BadRequest("Error canceling the appointment");

@@ -8,7 +8,11 @@ namespace BarberShop.Web.API.Models
 {
     public class Appointment
     {
-        public DateTime AppointmentDate { get; set; } //YMD FORMAT
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
+        public int Hour { get; set; }
+        public int Minutes { get; set; }
         public string PhoneNumber { get; set; }
 
         public bool Successful { get; set; }

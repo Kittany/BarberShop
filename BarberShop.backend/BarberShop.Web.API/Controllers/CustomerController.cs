@@ -12,7 +12,7 @@ namespace BarberShop.Web.API.Controllers
     public class CustomerController : ApiController
     {
 
-        // GET api/customer/getall
+        // GET api/customer/get
         [HttpPost]
         [Route("api/customer/get")]
         public IHttpActionResult GetCustomer(Customer customer)

@@ -36,6 +36,7 @@ namespace BarberShop.Web.API.Data
 
         }
 
+
         public static bool ChangePassword(string phoneNumber, string password)
         {
             try
@@ -121,6 +122,22 @@ namespace BarberShop.Web.API.Data
             }
         }
 
+
+        public static List<Appointment> GetCustomerAppointments(string phoneNumber)
+        {
+            try
+            {
+                using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
+                {
+                    return connection.Query<Appointment>("dbo.GetCustomerAppointments @phoneNumber", new { phoneNumber }).ToList();
+                }
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public static List<Customer> GetAllCustomers()
         {
             try
@@ -174,10 +191,10 @@ namespace BarberShop.Web.API.Data
 
 
 
-        public static bool BookAnAppointment(DateTime appointment, string phoneNumber)
+        public static bool BookAnAppointment(int year, int month, int day, int hour, int minute, string phoneNumber)
         {
             //The new format insures we are not dealing with seconds
-            DateTime appointmentDateFormat = new DateTime(appointment.Year, appointment.Month, appointment.Day, appointment.Hour, appointment.Minute, 0);
+            DateTime appointmentDateFormat = new DateTime(year, month, day, hour, minute, 0);
 
             try
             {
@@ -228,10 +245,11 @@ namespace BarberShop.Web.API.Data
 
         }
 
-        public static bool CancelAnAppointment(DateTime appointment)
+        public static bool CancelAnAppointment(int year, int month, int day, int hour, int minute)
         {
             //The new format insures we are not dealing with seconds
-            DateTime appointmentDateFormat = new DateTime(appointment.Year, appointment.Month, appointment.Day, appointment.Hour, appointment.Minute, 0);
+            DateTime appointmentDateFormat = new DateTime(year, month, day, hour, minute, 0);
+
 
             try
             {
@@ -248,17 +266,15 @@ namespace BarberShop.Web.API.Data
 
         }
 
-        public static List<object> GetTodaysAppointments(DateTime appointment)
+        public static List<object> GetAllAppointments()
         {
-            //The new format insures we are not dealing with seconds
-            DateTime appointmentDateFormat = new DateTime(appointment.Year, appointment.Month, appointment.Day, appointment.Hour, appointment.Minute, 0);
 
             try
             {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
                 {
 
-                    return connection.Query<object>("dbo.GetTodaysAppointments").ToList();
+                    return connection.Query<object>("dbo.GetAllAppointments").ToList();
                 }
 
             }
@@ -311,7 +327,7 @@ namespace BarberShop.Web.API.Data
             {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetServerConnectionString(connectionString)))
                 {
-                    return connection.Query<Shop>("dbo.GetProductDetails").FirstOrDefault();
+                    return connection.Query<Shop>("dbo.GetShopDetails").FirstOrDefault();
                 }
 
             }

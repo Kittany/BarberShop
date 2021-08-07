@@ -50,6 +50,15 @@ CREATE TABLE [dbo].[Appointments] (
 
 GO
 
+CREATE TABLE [dbo].[ShopDetail](
+	[FullName] [nvarchar](50) NOT NULL,
+	[ShopName] [nvarchar](50) NOT NULL,
+	[PhoneNumber] [nvarchar](10) NOT NULL,
+	[WorkingHours] [nvarchar](max) NOT NULL,
+	[LocationLatitude] [nvarchar](100) NOT NULL,
+	[LocationLongitude] [nvarchar](100) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
 
 
 /****** PROCEDURES ******/
@@ -94,11 +103,11 @@ GO
 
 
 
-CREATE PROCEDURE dbo.GetTodaysAppointments
+CREATE PROCEDURE dbo.GetAllAppointments
 AS
 BEGIN
 	SET NOCOUNT ON;
-			SELECT *  FROM [dbo].Appointments where CONVERT(date, Appointment) = CONVERT(date, getdate()) 
+			SELECT *  FROM [dbo].Appointments
 
 END
 GO
@@ -120,7 +129,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE dbo.GetShopDetail
+CREATE PROCEDURE dbo.GetShopDetails
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -128,6 +137,14 @@ BEGIN
 END
 GO
 
+
+CREATE PROCEDURE dbo.GetCustomerAppointments @phoneNumber nvarchar(10)
+AS
+BEGIN
+	SET NOCOUNT ON;
+			SELECT * FROM Appointments Where PhoneNumber = @phoneNumber
+END
+GO
 
 
 /****** POST ******/
