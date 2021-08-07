@@ -20,7 +20,7 @@ export default function Menu({navigation}) {
 					<View style={style.childContainer}>
 						<View style={style.navigationButtonContainer}>
 							<TouchableOpacity style={style.navigationButton} onPress={e => navigation.navigate(BOOK_APPOINTMENT)}>
-								<Text style={style.navigationButton.Text}>Book Appointment</Text>
+								<Text style={style.navigationButton.Text}>Book An Appointment</Text>
 							</TouchableOpacity>
 						</View>
 						<View style={style.navigationButtonContainer}>
@@ -31,7 +31,7 @@ export default function Menu({navigation}) {
 						{customer?.IsAdmin && (
 							<View style={style.navigationButtonContainer}>
 								<TouchableOpacity style={style.navigationButton} onPress={e => navigation.navigate(TODAYS_APPOINTMENTS)}>
-									<Text style={style.navigationButton.Text}>Today's Appointments</Text>
+									<Text style={style.navigationButton.Text}>Pending Appointments</Text>
 								</TouchableOpacity>
 							</View>
 						)}

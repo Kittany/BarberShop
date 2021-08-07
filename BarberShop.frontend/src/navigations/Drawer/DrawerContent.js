@@ -10,7 +10,7 @@ import { GlobalData } from "../../context/provider";
 import authInitialState from "../../context/initialStates/authInitialState";
 
 export default function DrawerContent({ navigation }) {
-	const [selectedScreen, setSelectedScreen] = useState(BOOKING_MENU); //When the app starts this will be selected
+	const [selectedScreen, setSelectedScreen] = useState(SHOP); //When the app starts this will be selected
 	const {
 		authState: { customer },
 		setAuthState,
