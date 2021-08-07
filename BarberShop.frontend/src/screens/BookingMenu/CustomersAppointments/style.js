@@ -68,11 +68,17 @@ export default {
 		alignItems: "center",
 		backgroundColor: PRIMARY,
 		width: "100%",
-		height: 80,
+		height: 120,
 		borderRadius: 10,
 		padding: 10,
 		marginBottom: "5%",
 		button: {
+			customerInfo: {
+				color: SECOND_PRIMARY,
+				fontWeight: "bold",
+				fontSize: 15,
+				marginTop: "5%",
+			},
 			text: {
 				fontSize: 15,
 				fontWeight: "bold",
@@ -90,16 +96,29 @@ export default {
 		borderTopWidth: 2,
 		borderBottomWidth: 2,
 		width: "100%",
-		height: 80,
+		height: 120,
 		borderRadius: 10,
 		padding: 10,
 		marginBottom: "5%",
+
 		button: {
-			flexDirection: "row",
 			width: "100%",
 			height: "100%",
 			justifyContent: "space-around",
 			alignItems: "center",
+			customerInfo: {
+				color: PRIMARY,
+				fontWeight: "bold",
+				fontSize: 15,
+				marginTop: "5%",
+			},
+			dateContainer: {
+				flexDirection: "row",
+				width: "100%",
+				height: "100%",
+				justifyContent: "space-around",
+				alignItems: "center",
+			},
 			text: {
 				fontSize: 15,
 				fontWeight: "bold",

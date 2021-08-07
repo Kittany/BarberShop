@@ -3,7 +3,7 @@ import {ActivityIndicator, SafeAreaView, ScrollView, StatusBar, Text, TouchableO
 import {useState, useEffect} from "react/cjs/react.development";
 import {PRIMARY, SECOND_PRIMARY} from "../../../constants/colors";
 import {GlobalData} from "../../../context/provider";
-import style from './style'
+import style from "./style";
 import FetchAPI from "../../../utils/FetchAPI";
 import {OK, BAD_REQUEST} from "../../../constants/server";
 import {OPS, SERVERS_DOWN} from "../../../constants/strings";
@@ -40,22 +40,19 @@ export default function CustomersAppointments({navigation}) {
 			if (response.status === OK) {
 				appointmentsInDatabase = await response.json();
 
-				//get the customer appointments (past and present)
+				//get the customers appointments (past and present)
 				await appointmentsInDatabase.forEach(item => {
-					if (item?.PhoneNumber === customer?.PhoneNumber) {
-						//Split the appointment date into an array, [0] contains the appointment date and [1] contains the appointment time
-						let tempAppointmentArray = item?.Appointment?.split("T");
-						//reformat the date to match the SQL format (I used replace 3 times because replaceAll doesn't seem to work)
-						tempAppointmentArray[0] = tempAppointmentArray[0].replace("-", "/");
-						tempAppointmentArray[0] = tempAppointmentArray[0].replace("-", "/");
-						tempAppointmentArray[0] = tempAppointmentArray[0].replace("-", "/");
+					//Split the appointment date into an array, [0] contains the appointment date and [1] contains the appointment time
+					let tempAppointmentArray = item?.Appointment?.split("T");
+					//reformat the date to match the SQL format (I used replace 3 times because replaceAll doesn't seem to work)
+					tempAppointmentArray[0] = tempAppointmentArray[0].replace("-", "/");
+					tempAppointmentArray[0] = tempAppointmentArray[0].replace("-", "/");
+					tempAppointmentArray[0] = tempAppointmentArray[0].replace("-", "/");
 
-						//Pass the date as a parameter to the Date class so we can pick which day it is
-						let appointmentDate = new Date(tempAppointmentArray[0]);
-
-						//show only upcoming dates
-						if (appointmentDate.getDate() >= today.getDate() && appointmentDate.getMonth() >= today.getMonth()) bookedAppointments.push({day: dayNames[(appointmentDate.getDate() - 1) % 7], date: tempAppointmentArray[0], time: tempAppointmentArray[1]});
-					}
+					//Pass the date as a parameter to the Date class so we can pick which day it is
+					let appointmentDate = new Date(tempAppointmentArray[0]);
+					//show only upcoming dates
+					if (appointmentDate.getDate() >= today.getDate() && appointmentDate.getMonth() >= today.getMonth()) bookedAppointments.push({phoneNumber: item.PhoneNumber, fullName: item.FullName, day: dayNames[(appointmentDate.getDate() - 1) % 7], date: tempAppointmentArray[0], time: tempAppointmentArray[1]});
 				});
 			} else if (response.status === BAD_REQUEST) {
 				setActivity(false);
@@ -107,7 +104,7 @@ export default function CustomersAppointments({navigation}) {
 			<SafeAreaView style={style.wrapper}>
 				<View style={style.container}>
 					<View style={style.header}>
-						<Text style={style.header.text}>My Appointments</Text>
+						<Text style={style.header.text}>Customers Appointments</Text>
 					</View>
 					{activity && <ActivityIndicator size="large" color={PRIMARY} style={{marginTop: "1%"}} />}
 					<ScrollView style={style.scrollView}>
@@ -117,17 +114,27 @@ export default function CustomersAppointments({navigation}) {
 									{selectedCard?.day === availableAppointment.day && selectedCard?.date === availableAppointment.date && selectedCard.time === availableAppointment.time ? (
 										<View style={style.selectedCard}>
 											<TouchableOpacity style={style.card.button} onPress={e => setSelectedCard({day: availableAppointment.day, date: availableAppointment.date, time: availableAppointment.time})}>
-												<Text style={style.selectedCard.button.text}> {availableAppointment?.day}</Text>
-												<Text style={style.selectedCard.button.text}> {availableAppointment?.date}</Text>
-												<Text style={style.selectedCard.button.text}>{availableAppointment?.time}</Text>
+												<Text style={style.selectedCard.button.customerInfo}>
+													{availableAppointment?.fullName} - {availableAppointment?.phoneNumber}
+												</Text>
+												<View style={style.card.button.dateContainer}>
+													<Text style={style.selectedCard.button.text}> {availableAppointment?.day}</Text>
+													<Text style={style.selectedCard.button.text}> {availableAppointment?.date}</Text>
+													<Text style={style.selectedCard.button.text}>{availableAppointment?.time}</Text>
+												</View>
 											</TouchableOpacity>
 										</View>
 									) : (
 										<View style={style.card}>
 											<TouchableOpacity style={style.card.button} onPress={e => setSelectedCard({day: availableAppointment.day, date: availableAppointment.date, time: availableAppointment.time})}>
-												<Text style={style.card.button.text}> {availableAppointment?.day}</Text>
-												<Text style={style.card.button.text}> {availableAppointment?.date}</Text>
-												<Text style={style.card.button.text}>{availableAppointment?.time}</Text>
+												<Text style={style.card.button.customerInfo}>
+													{availableAppointment?.fullName} - {availableAppointment?.phoneNumber}
+												</Text>
+												<View style={style.card.button.dateContainer}>
+													<Text style={style.card.button.text}> {availableAppointment?.day}</Text>
+													<Text style={style.card.button.text}> {availableAppointment?.date}</Text>
+													<Text style={style.card.button.text}>{availableAppointment?.time}</Text>
+												</View>
 											</TouchableOpacity>
 										</View>
 									)}

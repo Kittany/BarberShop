@@ -3,7 +3,7 @@ import {ActivityIndicator, SafeAreaView, ScrollView, StatusBar, Text, TouchableO
 import {useState, useEffect} from "react/cjs/react.development";
 import {PRIMARY, SECOND_PRIMARY} from "../../../constants/colors";
 import {GlobalData} from "../../../context/provider";
-import style from './style'
+import style from "./style";
 import FetchAPI from "../../../utils/FetchAPI";
 import {OK, BAD_REQUEST} from "../../../constants/server";
 import {OPS, SERVERS_DOWN} from "../../../constants/strings";
@@ -42,6 +42,7 @@ export default function MyAppointment({navigation}) {
 
 				//get the customer appointments (past and present)
 				await appointmentsInDatabase.forEach(item => {
+					//filter to my appointments only using the phone-number
 					if (item?.PhoneNumber === customer?.PhoneNumber) {
 						//Split the appointment date into an array, [0] contains the appointment date and [1] contains the appointment time
 						let tempAppointmentArray = item?.Appointment?.split("T");
